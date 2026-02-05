@@ -1,0 +1,53 @@
+﻿# Netlify Configuration File
+# This tells Netlify how to build and deploy your app
+
+[build]
+  # Command to run when building your app
+  command = "npm run build"
+  
+  # Folder containing the built files
+  publish = "build"
+  
+  # For serverless functions (optional)
+  functions = "netlify/functions"
+
+[build.environment]
+  # Node.js version to use
+  NODE_VERSION = "18"
+  
+  # Fixes dependency conflicts
+  NPM_FLAGS = "--legacy-peer-deps"
+
+# Settings for local development with Netlify CLI
+[dev]
+  command = "npm start"
+  port = 3000
+  publish = "public"
+
+# URL Redirects - IMPORTANT FOR REACT ROUTER!
+[[redirects]]
+  # Redirect all paths
+  from = "/*"
+  # To index.html
+  to = "/index.html"
+  # Status code 200 (success)
+  status = 200
+
+# Security Headers
+[[headers]]
+  # Apply to all paths
+  for = "/*"
+  [headers.values]
+    # Prevent page from being embedded in iframe
+    X-Frame-Options = "DENY"
+    # Enable cross-site scripting protection
+    X-XSS-Protection = "1; mode=block"
+    # Prevent MIME type sniffing
+    X-Content-Type-Options = "nosniff"
+    # Control how much referrer info is sent
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Production Environment Variables
+[context.production.environment]
+  REACT_APP_API_URL = "https://healthone-plus-backend.onrender.com/api"
+  REACT_APP_ENV = "production"
