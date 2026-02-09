@@ -1,4 +1,4 @@
-﻿# Netlify Configuration File
+# Netlify Configuration File
 # This tells Netlify how to build and deploy your app
 
 [build]
@@ -6,7 +6,7 @@
   command = "npm run build"
   
   # Folder containing the built files
-  publish = "build"
+  publish = "dist"  # ← CHANGED FROM "build" TO "dist"
   
   # For serverless functions (optional)
   functions = "netlify/functions"
